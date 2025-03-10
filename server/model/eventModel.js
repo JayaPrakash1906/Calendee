@@ -58,4 +58,4 @@ const DeleteEventModel = (id) => {
   });
 };
 
-module.exports =  {CreateEventModel, FetchEventsModel, UpdateEventsModel, DeleteEventModel} ; 
+module.exports =  {CreateEventModel, FetchEventsModel, UpdateEventsModel, DeleteEventModel} ;

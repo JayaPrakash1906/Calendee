@@ -51,17 +51,17 @@ const UpdateEvents = async (req, res) => {
   };
 
   const DeleteEvents = async (req, res) => {
-    const email = req.params.id;  // Extract email from params
+    const email = req.params.id;  
 
     if (!email) {
-        return res.status(400).json({ error: "Params missing" });  // 400 Bad Request
+        return res.status(400).json({ error: "Params missing" });  
     }
 
     try {
-        const result = await DeleteEventModel(email);  // Correct function name
+        const result = await DeleteEventModel(email);  
         return res.status(200).json(result);
     } catch (err) {
-        return res.status(500).json({ error: err.message });  // 500 Internal Server Error
+        return res.status(500).json({ error: err.message }); 
     }
 };
   

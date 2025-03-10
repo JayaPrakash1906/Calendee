@@ -59,11 +59,8 @@ const BiometricAccess = () => {
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) {
-        throw new Error('Submission failed');
-      }
-
-      const newRequest = await response.json();
+      if (response) {
+        const newRequest = await response.json();
       setRequests([...requests, newRequest]);
       alert('Request submitted successfully!');
       setFormData({
@@ -78,6 +75,9 @@ const BiometricAccess = () => {
         accessLocation: '',
         consent: false,
       });
+      }
+
+      
     } catch (error) {
       console.error('Error submitting form:', error);
       alert('An error occurred. Please try again.');
