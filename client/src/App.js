@@ -1,6 +1,9 @@
 import './App.css';
 import Home from './v1/Pages/Home';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
+import { BrowserRouter, Routes, Route, Redirect } from 'react-router-dom';
+import Login from '../src/v1/Components/Login';
+import Signup from '../src/v1/Components/Signup';
 import Leave from './v1/Pages/Leave';
 import Attendance from './v1/Pages/Attendance';
 import CreateTicket from './v1/Pages/CreateTicket';
@@ -14,25 +17,28 @@ import OtherRequest from './v1/Pages/OtherRequest';
 
 
 function App() {
+
   return (
     <div className="App dm-sans">
       {/* <Home /> */}
       <BrowserRouter>
           <Routes>
-              <Route path="/" element={<LandingPage/>}></Route>
+            
+              <Route path="/" element={<Login/>}></Route>
+              <Route path="/signup" element={<Signup/>}></Route>
+              <Route path="/oie/land" element={<LandingPage/>}></Route>
               <Route path="/oie/home" element={<Home/>}></Route>
               <Route path="/oie/create_ticket" element={<CreateTicket />}></Route>
               <Route path="/oie/leave" element={<Leave />}></Route>
               <Route path="/oie/attendance" element={<Attendance />} ></Route>
               <Route path="/oie/tickets" element={<Tickets />} ></Route>
               <Route path="/oie/booking" element={<Boooking />} ></Route>
-              <Route path="/oie/calendar/:roomNumber" element={<CalendarView />} ></Route> 
+              <Route path="/oie/calendar" element={<CalendarView />} ></Route> 
               <Route path="/oie/faq" element={<Home />} ></Route>
               <Route path="/oie/conference" element={<ConferenceBooking />} ></Route>
               <Route path="/oie/biometric" element={<BiometricAccess />} ></Route>
               <Route path="/oie/other_request" element={<OtherRequest />} ></Route>
               
-
           </Routes>
       </BrowserRouter>
         {/* <SideBar /> */}

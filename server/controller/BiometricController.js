@@ -1,16 +1,24 @@
 const {CreateBiometricModel, FetchBiometricModel, UpdateBiometricModel, DeleteBiometricModel}  = require('../model/BiometricModel');
+const EmailValid = require('../Validation/EmailValid');
+const PhoneNumberValid = require('../Validation/PhoneNumberValid');
 
 const CreateBiometric = async(req, res) =>{
-    const {fullName, employeeId, department, contactInfo, biometricType, reason, accessDuration, approvedBy, accessLocation,consent} = req.body;
-    if(!fullName || !employeeId || !department || !contactInfo || !biometricType || !reason || !accessDuration || !approvedBy || !accessLocation || !consent ) 
+    const {fullName, employeeId, department, contactInfo, biometricType, reason, accessDuration, approvedBy, accessLocation, consent, student_mail_id } = req.body;
+    if(!fullName || !employeeId || !department || !contactInfo || !biometricType || !reason || !accessDuration || !approvedBy || !accessLocation || !consent || !student_mail_id ) 
     {
         res.status(400).json({status: 'Check all fields'})
     }
+    else if (!EmailValid(email)) {
+      return res.status(422).json({Request: "Not a valid email"});
+  }
+  else if (!PhoneNumberValid(contact_number)) {
+      return res.status(403).json({Request: "Not a valid Phone number"});
+  }
     else 
     {
         try
         {
-            const result = await CreateBiometricModel(fullName, employeeId, department, contactInfo, biometricType, reason, accessDuration, approvedBy, accessLocation, consent);
+            const result = await CreateBiometricModel(fullName, employeeId, department, contactInfo, biometricType, reason, accessDuration, approvedBy, accessLocation, consent, student_mail_id);
             res.status(201).json(result);
         }
         catch(err) 
@@ -35,13 +43,13 @@ const FetchBiometric = async(req, res) => {
 
 const UpdateBiometric = async (req, res) => {
   try {
-    const { fullName, employeeId, department, contactInfo, biometricType, reason, accessDuration, approvedBy, accessLocation, consent } = req.body;
+    const { fullName, employeeId, department, contactInfo, biometricType, reason, accessDuration, approvedBy, accessLocation, consent, student_mail_id } = req.body;
 
-    if (!fullName || !employeeId || !department || !contactInfo || !biometricType || !reason || !accessDuration || !approvedBy || !accessLocation || !consent) {
+    if (!fullName || !employeeId || !department || !contactInfo || !biometricType || !reason || !accessDuration || !approvedBy || !accessLocation || !consent || !student_mail_id) {
       return res.status(400).json({ error: "All fields are required" });
     }
 
-    const result = await UpdateBiometricModel(fullName, employeeId, department, contactInfo, biometricType, reason, accessDuration, approvedBy, accessLocation, consent);
+    const result = await UpdateBiometricModel(fullName, employeeId, department, contactInfo, biometricType, reason, accessDuration, approvedBy, accessLocation, consent, student_mail_id);
 
     return res.status(200).json({ message: "Event updated successfully", data: result });
   } catch (err) {

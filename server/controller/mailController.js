@@ -1,38 +1,29 @@
-const nodemailer = ('nodemailer')
+const sendEmail = require('../config/emailConfig');
+const asyncHandler = require('express-async-handler');
 
+const EmailController = asyncHandler(async (req, res) => {
+  const { to, subject, message } = req.body;
 
-const signup = async (req,res) =>{
+  if (!to || !subject || !message) {
+    res.status(400);
+    throw new Error('Please fill all fields');
+  }
 
-    let testAccount = await nodemailer.createTestAccount();
-    let transporter = nodemailer.createTransport({
-        host: "smtp.ethereal.email",
-        port: 587,
-        secure: false, // true for port 465, false for other ports
-        auth: {
-            user: testAccount.user,
-            pass: testAccount.pass,
-            
-        },
-      });
-      
-      let message ={
-        from: '"Maddison Foo Koch 👻" <maddison53@ethereal.email>', // sender address
-        to: "bar@example.com, baz@example.com", // list of receivers
-        subject: "Hello ✔", // Subject line
-        text: "Hello world?", // plain text body
-        html: "<b>Hello world?</b>", // html body
-      }
-      
-      transporter.sendMail(message).then(() =>{
-        return res.status(201).json({msg : "you should receive an email"})
-      }).catch(error =>{
-        return res.status(500).json({ error})
-      })   
-      //res.status(201).json("signup successfully...!");
-}
+  try {
+    await sendEmail({
+      to,
+      subject,
+      message
+    });
 
-const getbill =(req,res) => {
-    res.status(201).json("getBill successfully...!");
-}
+    res.status(200).json({
+      success: true,
+      message: 'Email sent successfully'
+    });
+  } catch (error) {
+    res.status(500);
+    throw new Error('Email could not be sent');
+  }
+});
 
-module.exports = { signup,getbill}
+module.exports = {EmailController};

@@ -21,7 +21,7 @@ const LandingPage = () => {
             <div className="grid grid-cols-2 gap-10">
                     <div className="border rounded-lg">
                             <div className="flex justify-between gap-2 px-2 py-2 text-green-600 border-b">
-                                    <button className="flex gap-4 items-center"onClick={() => navigate("/oie/conference")}>    
+                                    <button className="flex gap-4 items-center"onClick={() => navigate("/oie/calendar")}>    
                                                 <div className="text-lg ">Conference Room Booking Request</div>
                                                 <img src={img1} alt="icon" className="w-14 h-14" />
                                     </button>

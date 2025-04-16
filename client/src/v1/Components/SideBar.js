@@ -13,7 +13,7 @@ function SideBar() {
                     <div className="pb-1 mb-1 flex justify-center items-center"><img src={img} className="w-[50%]" onClick={() => navigate("/")}/></div>
                 </li>
                 <li className="text-white pb-6">
-                    <a href="/oie/home">  
+                    <a href="/oie/land">  
                         <div className="text-xl pb-1 mb-1"><span className="hover:bg-[#1F8AFA] bg-[#232D63] p-2 rounded-xl"><FontAwesomeIcon icon={faHome} /></span></div>
                         <div className="text-[11px]">Home</div>
                     </a>
