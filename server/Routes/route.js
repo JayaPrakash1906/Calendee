@@ -7,6 +7,7 @@ const BiometricController = require('../controller/BiometricController');
 const TechnicalController = require('../controller/TechnicalController');
 const othersController = require('../controller/othersController');
 const { EmailController } = require('../controller/MailController');
+const connectionController = require('../controller/connectionController');
 
 
 
@@ -28,5 +29,8 @@ router.put('/updatetechreq', TechnicalController.UpdateTechnical);
 router.delete('/deletetechreq/:id', TechnicalController.DeleteTechnical);
 router.get('/others', othersController);
 router.post('/sendemail', EmailController);
+router.post('/', connectionController.createConnection);
+router.get('/', connectionController.getAllConnections);
+router.delete('/:email', connectionController.deleteConnection);
 
 module.exports = router;

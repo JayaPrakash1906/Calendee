@@ -5,7 +5,7 @@ const PhoneNumberValid = require('../Validation/PhoneNumberValid');
 const CreateEvents = async(req, res) => {
     const {name, meeting_name, start_time, end_time, purpose, contact_number, email, team_category, team_sub_category, other_option, room_type} = req.body;
     
-    if (!name || !meeting_name || !start_time || !end_time || !purpose || !contact_number || !email || !team_category || !team_sub_category || !room_type) {
+    if (!name || !meeting_name || !start_time || !end_time || !purpose || !contact_number || !email || !team_category || !room_type) {
         return res.status(400).json({status: 'Check all fields'});
     }
     else if (!EmailValid(email)) {
@@ -49,6 +49,7 @@ const UpdateEvents = async (req, res) => {
         }
     
         const result = await UpdateEventsModel(name, meeting_name, start_time, end_time, purpose, contact_number, team_category, team_sub_category, room_type, email);
+        
     
         return res.status(200).json({ message: "Event updated successfully", data: result });
     } catch (err) {

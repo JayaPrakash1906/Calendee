@@ -44,6 +44,7 @@ const UpdateTechnical = async (req, res) => {
     const result = await UpdateTechnicalModel(type, category, urgency, location, title, description, filename);
 
     return res.status(200).json({ message: "Technical Issue  updated successfully", data: result });
+    
   } catch (err) {
     console.error("Error updating event:", err);
     return res.status(500).json({ error: "Internal Server Error" });

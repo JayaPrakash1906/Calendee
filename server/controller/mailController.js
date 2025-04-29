@@ -2,9 +2,9 @@ const sendEmail = require('../config/emailConfig');
 const asyncHandler = require('express-async-handler');
 
 const EmailController = asyncHandler(async (req, res) => {
-  const { to, subject, message } = req.body;
+  const { to, cc,  subject, message } = req.body;
 
-  if (!to || !subject || !message) {
+  if (!to || !cc || !subject || !message) {
     res.status(400);
     throw new Error('Please fill all fields');
   }
@@ -12,8 +12,10 @@ const EmailController = asyncHandler(async (req, res) => {
   try {
     await sendEmail({
       to,
+      cc,
       subject,
-      message
+      message,
+      
     });
 
     res.status(200).json({

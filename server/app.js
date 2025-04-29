@@ -5,6 +5,7 @@ const eventController = require('./Routes/route');
 const BiometricController = require('./Routes/route');
 const TechnicalController = require('./Routes/route');
 const MailController = require('./Routes/route');
+const connectionController = require('./Routes/route');
 const cors = require('cors');
 
 
@@ -26,5 +27,6 @@ app.use('/api', eventController);
 app.use('/api', BiometricController);
 app.use('/test', TechnicalController);
 app.use('/api', MailController);
+app.use('/connect', connectionController);
 
 
